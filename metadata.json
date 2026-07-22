@@ -1,0 +1,6 @@
+{
+  "name": "Karl David Ocfemia - Editorial Portfolio",
+  "description": "An editorial magazine-style portfolio for Karl David Z. Ocfemia showcasing computer science projects and literary writing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

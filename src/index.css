@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-serif-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .font-serif-body {
+    font-family: 'Newsreader', Georgia, serif;
+  }
+  .font-sans-ui {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  .font-mono-code {
+    font-family: 'Fira Code', monospace;
+  }
+}
+
+/* Custom Editorial & Tech Gazette Palette Classes */
+:root {
+  --maroon-primary: #800020;
+  --maroon-deep: #4A0E17;
+  --maroon-dark: #2B080D;
+  --maroon-soft: #A3283B;
+  --gold-accent: #D4AF37;
+  --gold-amber: #C59B27;
+  --gold-light: #F4E8C1;
+  --cream-bg: #FAF6F0;
+  --cream-card: #F2EBE1;
+  --cream-border: #E2D7C7;
+  --ink-body: #1C1618;
+  --ink-muted: #574B4E;
+}
+
+/* Subtle Technical Grid Overlay Background */
+.bg-tech-grid {
+  background-color: #FAF6F0;
+  background-image: 
+    radial-gradient(rgba(128, 0, 32, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, rgba(128, 0, 32, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(128, 0, 32, 0.02) 1px, transparent 1px);
+  background-size: 24px 24px, 48px 48px, 48px 48px;
+  background-position: 0 0, 0 0, 0 0;
+}
+
+/* Terminal / Tech Bracket Accent */
+.tech-box {
+  position: relative;
+  background: #FAF6F0;
+  border: 1px solid rgba(128, 0, 32, 0.25);
+}
+
+.tech-box::before {
+  content: '[';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: #800020;
+  font-weight: bold;
+}
+
+.tech-box::after {
+  content: ']';
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  color: #800020;
+  font-weight: bold;
+}
+
+/* Drop Cap for Editorial Articles */
+.drop-cap::first-letter {
+  font-family: 'Playfair Display', Georgia, serif;
+  float: left;
+  font-size: 3.8rem;
+  line-height: 0.8;
+  padding-top: 4px;
+  padding-right: 12px;
+  padding-bottom: 2px;
+  color: #800020;
+  font-weight: 700;
+}
+
+/* Newspaper Column Border Dividers */
+.editorial-border-r {
+  border-right: 1px solid rgba(128, 0, 32, 0.18);
+}
+
+.editorial-border-b {
+  border-bottom: 1px solid rgba(128, 0, 32, 0.18);
+}
+
+.editorial-double-line {
+  border-top: 3px double #800020;
+  border-bottom: 1px solid #800020;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF6F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #800020;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5C121E;
+}
+
+/* Print Styles for Resume & Articles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
