@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { ProjectItem, CodeCategory } from '../types';
 import { PROJECTS_DATA } from '../data/portfolioData';
-import { Code, Database, Terminal, ArrowRight, Github, ExternalLink, Filter, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Code, Database, Terminal, ArrowRight, Github, ExternalLink, Filter, Sparkles, CheckCircle2, Ticket, Clock, Layout } from 'lucide-react';
 import { InteractiveSqlSandbox } from './InteractiveSqlSandbox';
 import { InteractivePythonConsole } from './InteractivePythonConsole';
+import { InteractiveMemoryTicketing } from './InteractiveMemoryTicketing';
+import { InteractivePomodoroTimer } from './InteractivePomodoroTimer';
+import { InteractiveNotionClone } from './InteractiveNotionClone';
 import { ParallaxHeader, ParallaxCard, ParallaxWrapper } from './Parallax';
 
 interface CodeSectionProps {
@@ -18,6 +21,7 @@ export const CodeSection: React.FC<CodeSectionProps> = ({
   fontSize
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<CodeCategory>('All');
+  const [activePlayground, setActivePlayground] = useState<'sql' | 'ticketing' | 'pomodoro' | 'notion' | 'python'>('sql');
 
   const categories: CodeCategory[] = ['All', 'Database / SQL', 'Web Development', 'Python / Console'];
 
@@ -134,19 +138,64 @@ export const CodeSection: React.FC<CodeSectionProps> = ({
                 <Sparkles className="w-4 h-4 text-[#D4AF37]" /> Live Interactive Systems Lab
               </span>
               <h2 className="font-serif-display text-2xl sm:text-3xl font-bold text-[#FAF6F0] mt-1">
-                Course Management SQL Playground
+                Interactive Systems &amp; Software Demos
               </h2>
             </div>
-            <span className="text-xs font-mono-code bg-[#800020] text-[#D4AF37] px-3 py-1 rounded border border-[#D4AF37]/30">
-              Executable Relational Queries
-            </span>
+
+            {/* Sandbox Selector Tabs */}
+            <div className="flex flex-wrap items-center gap-1.5 bg-[#1C0508] p-1.5 rounded-lg border border-[#800020]">
+              <button
+                onClick={() => setActivePlayground('sql')}
+                className={`text-xs font-mono-code font-bold px-3 py-1.5 rounded transition-all cursor-pointer flex items-center gap-1.5 ${
+                  activePlayground === 'sql' ? 'bg-[#800020] text-[#D4AF37] shadow-xs' : 'text-[#E2D7C7]/70 hover:text-white'
+                }`}
+              >
+                <Database className="w-3.5 h-3.5" /> SQL Sandbox
+              </button>
+              <button
+                onClick={() => setActivePlayground('ticketing')}
+                className={`text-xs font-mono-code font-bold px-3 py-1.5 rounded transition-all cursor-pointer flex items-center gap-1.5 ${
+                  activePlayground === 'ticketing' ? 'bg-[#800020] text-[#D4AF37] shadow-xs' : 'text-[#E2D7C7]/70 hover:text-white'
+                }`}
+              >
+                <Ticket className="w-3.5 h-3.5" /> Memory Ticketing
+              </button>
+              <button
+                onClick={() => setActivePlayground('pomodoro')}
+                className={`text-xs font-mono-code font-bold px-3 py-1.5 rounded transition-all cursor-pointer flex items-center gap-1.5 ${
+                  activePlayground === 'pomodoro' ? 'bg-[#800020] text-[#D4AF37] shadow-xs' : 'text-[#E2D7C7]/70 hover:text-white'
+                }`}
+              >
+                <Clock className="w-3.5 h-3.5" /> Pomodoro Timer
+              </button>
+              <button
+                onClick={() => setActivePlayground('notion')}
+                className={`text-xs font-mono-code font-bold px-3 py-1.5 rounded transition-all cursor-pointer flex items-center gap-1.5 ${
+                  activePlayground === 'notion' ? 'bg-[#800020] text-[#D4AF37] shadow-xs' : 'text-[#E2D7C7]/70 hover:text-white'
+                }`}
+              >
+                <Layout className="w-3.5 h-3.5" /> Notion Workspace
+              </button>
+              <button
+                onClick={() => setActivePlayground('python')}
+                className={`text-xs font-mono-code font-bold px-3 py-1.5 rounded transition-all cursor-pointer flex items-center gap-1.5 ${
+                  activePlayground === 'python' ? 'bg-[#800020] text-[#D4AF37] shadow-xs' : 'text-[#E2D7C7]/70 hover:text-white'
+                }`}
+              >
+                <Terminal className="w-3.5 h-3.5" /> Python Console
+              </button>
+            </div>
           </div>
 
           <p className="font-serif-body text-xs sm:text-sm text-[#E2D7C7]/90 leading-relaxed mb-6">
-            Test SQL queries against Karl David Z. Ocfemia&apos;s relational database schema built during his Computer Science coursework at Bicol University Polangui.
+            Explore live, fully functional software systems engineered during Karl David Z. Ocfemia&apos;s Computer Science studies at Bicol University Polangui.
           </p>
 
-          <InteractiveSqlSandbox />
+          {activePlayground === 'sql' && <InteractiveSqlSandbox />}
+          {activePlayground === 'ticketing' && <InteractiveMemoryTicketing />}
+          {activePlayground === 'pomodoro' && <InteractivePomodoroTimer />}
+          {activePlayground === 'notion' && <InteractiveNotionClone />}
+          {activePlayground === 'python' && <InteractivePythonConsole />}
         </section>
       </ParallaxWrapper>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProjectItem, WritingItem, ViewMode } from '../types';
 import { PROJECTS_DATA, WRITING_DATA, PERSONAL_INFO, SOCIAL_LINKS } from '../data/portfolioData';
-import { BookOpen, Code, Feather, ArrowRight, Clock, Star, Terminal, Sparkles, User, Database, ExternalLink, GraduationCap, Award } from 'lucide-react';
+import { BookOpen, Code, Feather, ArrowRight, Clock, Star, Terminal, Sparkles, User, Database, ExternalLink, GraduationCap, Award, FileText } from 'lucide-react';
 import { FacebookIcon, InstagramIcon } from './SocialIcons';
 import { ParallaxWrapper, ParallaxCard, ParallaxBanner } from './Parallax';
 
@@ -28,29 +28,32 @@ export const FrontPage: React.FC<FrontPageProps> = ({
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-      {/* Top Welcome Notice */}
-      <ParallaxBanner className="bg-[#F2EBE1] border-l-4 border-[#800020] p-4 mb-8 rounded-r flex flex-wrap items-center justify-between gap-3 text-xs font-sans-ui text-[#1C1618] shadow-xs">
+      {/* Resume Redirect Banner */}
+      <ParallaxBanner className="bg-[#F2EBE1] border border-[#800020]/30 hover:border-[#800020] p-4 mb-8 rounded-xl flex flex-wrap items-center justify-between gap-4 text-xs font-sans-ui text-[#1C1618] shadow-xs transition-all">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-[#800020] text-[#D4AF37] font-mono-code font-bold text-xs flex items-center justify-center border border-[#D4AF37] shrink-0 shadow-xs">
-            KO
+          <div className="w-9 h-9 rounded-lg bg-[#800020] text-[#FAF6F0] font-mono-code font-bold text-xs flex items-center justify-center shrink-0 shadow-xs">
+            <FileText className="w-5 h-5 text-[#D4AF37]" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] bg-[#800020] text-[#D4AF37] px-2 py-0.5 rounded font-bold uppercase tracking-wider">
-                Welcome
+              <span className="text-[10px] bg-[#800020] text-[#D4AF37] px-2 py-0.5 rounded font-mono-code font-bold uppercase tracking-wider">
+                Curriculum Vitae
               </span>
-              <span className="font-bold text-[#800020]">Karl David Z. Ocfemia</span>
+              <span className="font-serif-display font-bold text-sm text-[#800020]">
+                Academic &amp; Professional Resume
+              </span>
             </div>
             <p className="text-[11px] text-[#574B4E] mt-0.5">
-              Explore my software engineering projects, SQL database systems, literary essays, and academic resume.
+              Review technical skill set, course projects, academic background, and editorial experience.
             </p>
           </div>
         </div>
         <button
           onClick={() => onSelectView('resume')}
-          className="text-[#800020] hover:underline font-bold text-xs flex items-center gap-1 cursor-pointer bg-[#FAF6F0] px-3 py-1.5 rounded border border-[#E2D7C7]"
+          className="text-[#FAF6F0] bg-[#800020] hover:bg-[#5A0017] font-bold text-xs flex items-center gap-2 cursor-pointer px-4 py-2 rounded-lg border border-[#D4AF37]/40 shadow-xs transition-all hover:scale-[1.02] active:scale-[0.98]"
         >
-          View Full Resume →
+          <span>Explore Resume &amp; Credentials</span>
+          <ArrowRight className="w-3.5 h-3.5 text-[#D4AF37]" />
         </button>
       </ParallaxBanner>
 
@@ -120,15 +123,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                   {leadProject.summary} Designed in 3rd Normal Form for Bicol University Polangui, incorporating student records, course catalog, and grade point query optimization.
                 </p>
 
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#800020]/20">
-                  <div className="flex flex-wrap gap-1.5">
-                    {leadProject.tags.map((tag, idx) => (
-                      <span key={idx} className="text-xs font-mono-code bg-[#F2EBE1] text-[#800020] px-2.5 py-1 rounded border border-[#E2D7C7]">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-
+                <div className="flex flex-wrap items-center justify-end gap-4 pt-4 border-t border-[#800020]/20">
                   <button
                     onClick={() => onSelectProject(leadProject)}
                     className="bg-[#800020] hover:bg-[#4A0E17] text-[#FAF6F0] font-sans-ui font-bold text-xs px-5 py-2.5 rounded shadow flex items-center gap-2 cursor-pointer transition-all"
@@ -156,15 +151,7 @@ export const FrontPage: React.FC<FrontPageProps> = ({
                     {leadWriting.excerpt}
                   </p>
 
-                  <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#800020]/20">
-                    <div className="flex flex-wrap gap-1.5">
-                      {leadWriting.tags.map((tag, idx) => (
-                        <span key={idx} className="text-xs font-mono-code bg-[#F2EBE1] text-[#800020] px-2.5 py-1 rounded border border-[#E2D7C7]">
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-
+                  <div className="flex flex-wrap items-center justify-end gap-4 pt-4 border-t border-[#800020]/20">
                     <div className="flex items-center gap-2">
                       {leadWriting.facebookUrl && (
                         <a

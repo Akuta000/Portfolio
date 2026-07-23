@@ -192,6 +192,156 @@ class InventoryItem:
         explanation: 'Responsive CSS Grid rule scaling from single column on mobile to three columns on desktop screens.'
       }
     ]
+  },
+  {
+    id: 'memory-ticketing-system',
+    title: 'Memory Event Ticketing Engine',
+    subtitle: 'In-Memory Concurrency Control & Real-Time Seat Allocation System',
+    date: '2024',
+    category: 'Web Development',
+    tags: ['TypeScript', 'React', 'Event Ticketing', 'State Management', 'In-Memory Cache', 'UI System'],
+    status: 'Live Demo',
+    readTime: '5 min read',
+    leadQuote: 'Preventing double-booking race conditions during high-demand event drops using optimistic in-memory lock tables.',
+    summary: 'Designed an interactive memory-backed event ticketing platform featuring real-time seat map allocation, ticket hold countdown timers, and digital QR admission token generation.',
+    problem: 'High-demand ticket drops for university campus events frequently suffer from database transaction lock contention and race conditions where multiple users claim the same seat simultaneously.',
+    solution: 'Engineered an in-memory optimistic locking engine that reserves selected seat IDs immediately upon user click, applies 10-minute hold expiration windows, and generates unique encrypted admission UUID passes.',
+    keyLearnings: [
+      'Implemented optimistic concurrency locking for high-density 200+ seat grids.',
+      'Engineered countdown hold timers with auto-release mechanisms on timeout.',
+      'Generated digital QR admission tokens and ticket metadata summaries.'
+    ],
+    featured: true,
+    githubUrl: 'https://github.com/karldavidocfemia/memory-ticketing-system',
+    codeSnippets: [
+      {
+        title: 'In-Memory Seat Locking Mechanism (TypeScript)',
+        language: 'typescript',
+        code: `export interface SeatLock {
+  seatId: string;
+  userId: string;
+  lockedAt: number;
+  expiresAt: number;
+}
+
+export class MemoryTicketingEngine {
+  private locks: Map<string, SeatLock> = new Map();
+
+  public tryLockSeat(seatId: string, userId: string, holdMs: number = 600000): boolean {
+    const existing = this.locks.get(seatId);
+    const now = Date.now();
+
+    if (existing && existing.expiresAt > now && existing.userId !== userId) {
+      return false; // Seat currently locked by another user
+    }
+
+    this.locks.set(seatId, {
+      seatId,
+      userId,
+      lockedAt: now,
+      expiresAt: now + holdMs
+    });
+    return true;
+  }
+}`,
+        explanation: 'In-memory seat lock table validating timestamp bounds and preventing double-booking.'
+      }
+    ]
+  },
+  {
+    id: 'editorial-pomodoro-timer',
+    title: 'Editorial Focus Pomodoro Engine',
+    subtitle: 'Minimalist Time-Boxing & Productivity Workstation for Writers',
+    date: '2024',
+    category: 'Web Development',
+    tags: ['React', 'TypeScript', 'Pomodoro Engine', 'Audio API', 'Productivity', 'Tailwind CSS'],
+    status: 'Live Demo',
+    readTime: '4 min read',
+    leadQuote: 'Balancing intense literary drafting and programming sessions through structured 25-minute focus intervals and soundscapes.',
+    summary: 'A vintage newspaper-inspired Pomodoro timer tailored for literary publication writers and software engineers. Features time-boxing cycles, Web Audio synthesized chimes, task queues, and focus session analytics.',
+    problem: 'Standard web timers are visually noisy, distracting, or lack integrated session logging for tracking long writing and coding hours.',
+    solution: 'Constructed a minimalist distraction-free productivity workstation with Web Audio API chime synthesis, custom interval presets (25m focus / 5m short break / 15m long break), task checklist management, and persistent session logs.',
+    keyLearnings: [
+      'Utilized browser Web Audio API for harmonic sine-wave chime alerts without external asset latency.',
+      'Designed responsive circular SVG progress dial animations with millisecond tracking.',
+      'Structured daily focus session logs to quantify deep work time.'
+    ],
+    featured: true,
+    githubUrl: 'https://github.com/karldavidocfemia/editorial-pomodoro-timer',
+    codeSnippets: [
+      {
+        title: 'Web Audio API Chime Synthesis (TypeScript)',
+        language: 'typescript',
+        code: `export const playFocusChime = () => {
+  const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+  if (!AudioCtx) return;
+
+  const ctx = new AudioCtx();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+  osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3); // A5
+
+  gain.gain.setValueAtTime(0.3, ctx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.2);
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start();
+  osc.stop(ctx.currentTime + 1.2);
+};`,
+        explanation: 'Custom audio synthesis engine generating clean frequency notification tones.'
+      }
+    ]
+  },
+  {
+    id: 'notion-workspace-clone',
+    title: 'Notion-Inspired Minimalist Workspace Engine',
+    subtitle: 'Block-Based Document Editor, Kanban Board & Workspace Notebook',
+    date: '2024',
+    category: 'Web Development',
+    tags: ['React', 'TypeScript', 'Block Editor', 'Kanban Board', 'Local Storage', 'Notion Clone'],
+    status: 'Live Demo',
+    readTime: '6 min read',
+    leadQuote: 'Empowering student writers and developers to organize prose, code blocks, and editorial tasks in a flexible workspace.',
+    summary: 'An elegant imitation of Notion built with React and TypeScript. Features block-based document editing (headings, todos, code blocks, callouts), multi-page sidebar navigation, interactive drag-and-drop Kanban task boards, and Markdown export.',
+    problem: 'Students and literary editors need a clean, offline-friendly workspace combining rich editorial prose formatting, code snippet blocks, and task status tracking.',
+    solution: 'Architected a modular block data structure supporting real-time block insertion, task completion toggling, multi-page document switching, interactive Kanban boards, and instant Markdown source generation.',
+    keyLearnings: [
+      'Designed recursive block data structures supporting multiple block format types.',
+      'Implemented dual-view UI switching between block document layouts and Kanban task boards.',
+      'Engineered one-click Markdown serialization for seamless document export.'
+    ],
+    featured: true,
+    githubUrl: 'https://github.com/karldavidocfemia/notion-workspace-clone',
+    codeSnippets: [
+      {
+        title: 'Block Document Structure & Markdown Serializer (TypeScript)',
+        language: 'typescript',
+        code: `export interface Block {
+  id: string;
+  type: 'text' | 'h1' | 'h2' | 'todo' | 'code' | 'callout' | 'quote';
+  content: string;
+  completed?: boolean;
+}
+
+export const serializeToMarkdown = (title: string, blocks: Block[]): string => {
+  let md = \`# \${title}\\n\\n\`;
+  blocks.forEach((b) => {
+    if (b.type === 'h1') md += \`# \${b.content}\\n\\n\`;
+    else if (b.type === 'h2') md += \`## \${b.content}\\n\\n\`;
+    else if (b.type === 'todo') md += \`- [\${b.completed ? 'x' : ' '}] \${b.content}\\n\`;
+    else if (b.type === 'code') md += \`\`\`\\n\${b.content}\\n\`\`\`\\n\\n\`;
+    else md += \`\${b.content}\\n\\n\`;
+  });
+  return md;
+};`,
+        explanation: 'Block serializer transforming document state into clean Markdown formatting.'
+      }
+    ]
   }
 ];
 

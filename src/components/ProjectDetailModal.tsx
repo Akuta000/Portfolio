@@ -3,6 +3,9 @@ import { ProjectItem } from '../types';
 import { X, ExternalLink, Github, Code, CheckCircle2, Clock, Sparkles } from 'lucide-react';
 import { InteractiveSqlSandbox } from './InteractiveSqlSandbox';
 import { InteractivePythonConsole } from './InteractivePythonConsole';
+import { InteractiveMemoryTicketing } from './InteractiveMemoryTicketing';
+import { InteractivePomodoroTimer } from './InteractivePomodoroTimer';
+import { InteractiveNotionClone } from './InteractiveNotionClone';
 
 interface ProjectDetailModalProps {
   project: ProjectItem | null;
@@ -105,6 +108,24 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             {project.id === 'inventory-tracker-python' && (
               <div className="my-8">
                 <InteractivePythonConsole />
+              </div>
+            )}
+
+            {project.id === 'memory-ticketing-system' && (
+              <div className="my-8">
+                <InteractiveMemoryTicketing />
+              </div>
+            )}
+
+            {project.id === 'editorial-pomodoro-timer' && (
+              <div className="my-8">
+                <InteractivePomodoroTimer />
+              </div>
+            )}
+
+            {project.id === 'notion-workspace-clone' && (
+              <div className="my-8">
+                <InteractiveNotionClone />
               </div>
             )}
 
